@@ -37,9 +37,11 @@ export default function App() {
         <div className={step >= 3 ? "active" : ""}>3</div>
       </div>
 
-      <p className="message">
+      <Message step={step}>{messages[step - 1]}</Message>
+
+      {/* <p className="message">
         Step {step}: {messages[step - 1]}
-      </p>
+      </p> */}
 
       <div className="buttons">
         <Button bgColor='#7950f2' color='#fff' handleClick={handlePrevious}>Prev</Button>
@@ -61,4 +63,8 @@ export default function App() {
 
 function Button({bgColor, color, handleClick, children}: {bgColor: string, color: string, handleClick: () => void, children: ReactElement | string | number}) {
   return <button style={{backgroundColor: bgColor, color: color}} onClick={handleClick}>{children}</button>
+}
+
+function Message({step, children}: {step: number, children: ReactElement | string | number}) {
+  return <p className="message"><h3>Step {step}:</h3> {children}</p>
 }
