@@ -42,8 +42,8 @@ export default function App() {
       </p>
 
       <div className="buttons">
-        <button style={{backgroundColor: '#7950f2', color: '#fff'}} onClick={handlePrevious}>Previous</button>
-        <button style={{backgroundColor: '#7950f2', color: '#fff'}} onClick={handleNext}>Next</button>
+        <Button bgColor='#7950f2' color='#fff' handleClick={handlePrevious}>Prev</Button>
+        <Button bgColor='#7950f2' color='#fff' handleClick={handleNext}>Next</Button>
       </div>
     </div>
     );
@@ -57,4 +57,8 @@ export default function App() {
       {stepsTemplate}
     </>
   )
+}
+
+function Button({bgColor, color, handleClick, children}: {bgColor: string, color: string, handleClick: () => void, children: ReactElement | string | number}) {
+  return <button style={{backgroundColor: bgColor, color: color}} onClick={handleClick}>{children}</button>
 }
