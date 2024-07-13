@@ -2,6 +2,14 @@ import { useState } from "react";
 import Navbar from "./components/Navbar/Navbar";
 import Main from "./components/Main/Main"
 import { MovieInterface } from "./types/MovieInterface";
+import NumResults from "./components/Navbar/NumResults";
+import Searchbar from "./components/Navbar/Searchbar";
+import MovieList from "./components/Main/Movies/MovieList";
+import Box from "./components/Main/Box";
+import WatchedSummary from "./components/Main/Watched/WatchedSummary";
+import WatchedMovieList from "./components/Main/Watched/WatchedMovieList";
+import { WatchedMovieInterface } from "./types/WatchedMovieInterface";
+import StarRating from "./components/shared/StarRating";
 
 const tempMovieData: MovieInterface[] = [
   {
@@ -27,13 +35,48 @@ const tempMovieData: MovieInterface[] = [
   },
 ];
 
+const tempWatchedData: WatchedMovieInterface[] = [
+  {
+      imdbID: "tt1375666",
+      Title: "Inception",
+      Year: "2010",
+      Poster:
+          "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_SX300.jpg",
+      runtime: 148,
+      imdbRating: 8.8,
+      userRating: 10,
+  },
+  {
+      imdbID: "tt0088763",
+      Title: "Back to the Future",
+      Year: "1985",
+      Poster:
+          "https://m.media-amazon.com/images/M/MV5BZmU0M2Y1OGUtZjIxNi00ZjBkLTg1MjgtOWIyNThiZWIwYjRiXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg",
+      runtime: 116,
+      imdbRating: 8.5,
+      userRating: 9,
+  },
+];
+
 export default function App() {
   const [movies, setMovies] = useState(tempMovieData);
+  const [watched, setWatched] = useState(tempWatchedData);
 
   return (
     <>
-      <Navbar movies={movies} />
-      <Main movies={movies} />
+      <Navbar>
+        <Searchbar />
+        <NumResults movies={movies} />
+      </Navbar>
+      <Main>
+        <Box>
+         <MovieList movies={movies} />
+        </Box>
+        <Box>
+          <WatchedSummary watched={watched} />
+          <WatchedMovieList watched={watched} />
+        </Box>
+      </Main>
     </>
   );
 }
